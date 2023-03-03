@@ -1,0 +1,47 @@
+
+
+.card {
+  width: 100%;
+  /* background: rgb(239, 239, 239); */
+  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tile {
+  width: 33%;
+  padding: 50px;
+  /* background: lightyellow; */
+  align-items: center;
+  justify-content: center;
+}
+
+
+.card-header-motorcycle-image {
+  background-image: url('../../../assets/motorcycle.png');
+  background-size: cover;
+  border-radius: 0%;
+}
+
+.card-header-car-image {
+background-image: url('../../../assets/car.png');
+background-size: cover;
+border-radius: 0%;
+}
+
+.card-header-truck-image {
+background-image: url('../../../assets/truck.png');
+background-size: cover;
+border-radius: 0%;
+}
+
+
+.header {
+  padding: 25px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 30px;
+  /* margin-bottom: 5%; */
+}
