@@ -1,0 +1,25 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+mat-toolbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.toolbar-button-feedback{
+    position: relative;
+    overflow: hidden;
+}
+
+.toolbar-button-feedback:hover{
+    background-color: rgb(51, 51, 162);
+}
+
+.toolbar-mat-menu-item{
+    font-size: 16px;
+    padding: 8px 16px;
+}

@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button class="toolbar-button-feedback" [mat-menu-trigger-for]="leftMenu"> 
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span>Parking Lot Management</span>
+    <span class="spacer"></span>
+    <button mat-button class="toolbar-button-feedback">About</button>
+    <button mat-button class="toolbar-button-feedback" [mat-menu-trigger-for]="rightMenu">
+        {{userIsAuthenticated ? username : 'Authentication'}}
+    </button>
+</mat-toolbar>
+
+<mat-menu #rightMenu="matMenu">
+    <button mat-menu-item class="toolbar-mat-menu-item" routerLink="/signin" *ngIf="!userIsAuthenticated">Sign in</button>
+    <button mat-menu-item class="toolbar-mat-menu-item" routerLink="/signup" *ngIf="!userIsAuthenticated">Sign up</button>
+    <button (click)="logout()" mat-menu-item class="toolbar-mat-menu-item" *ngIf="userIsAuthenticated">Log out</button>
+</mat-menu>
+
+<mat-menu #leftMenu="matMenu">
+    <button mat-menu-item class="toolbar-mat-menu-item" routerLink="/parking-lot">Parking Lot</button>
+</mat-menu>

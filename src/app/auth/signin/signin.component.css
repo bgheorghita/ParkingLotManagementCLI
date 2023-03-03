@@ -1,0 +1,52 @@
+.form-center{
+    width: 40%;
+    height: 60%;
+    
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    margin: auto;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid grey;
+  }
+
+  input:focus, select:focus {
+    outline: none !important;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid rgb(41, 33, 194);
+  }
+
+  input:hover {
+    /* outline: none !important;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid rgb(41, 33, 194); */
+    /* background-color: gainsboro; */
+  }
+
+  .loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform: -webkit-translate(-50%, -50%);
+    transform: -moz-translate(-50%, -50%);
+    transform: -ms-translate(-50%, -50%);
+  }

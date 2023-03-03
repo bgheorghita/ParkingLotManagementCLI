@@ -1,0 +1,17 @@
+<div [formGroup]="signinForm" *ngIf="!isLoading" class="form-center">
+    <label>Username</label>
+    <input formControlName="username" type="text">
+    <br>
+    <label>Password</label>
+    <input formControlName="password" type="password">
+    <br>
+    <button mat-stroked-button (click)="submitSigninForm()" color="primary">Log in</button>
+    <br>
+    <label>Do not have an account?</label>
+    <button mat-stroked-button color="primary" routerLink="/signup">Sign up</button>
+    <p *ngIf="error" style="color: red;">{{error}}</p>
+    <app-alert [message]="error" *ngIf="error"></app-alert>
+</div>
+<div class="loader" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+</div>
