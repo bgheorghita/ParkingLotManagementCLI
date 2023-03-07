@@ -1,11 +1,11 @@
-import { DatePipe } from '@angular/common';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { InfoDialogComponent } from 'src/app/dialogs/info-dialog/info-dialog.component';
-import { UserDashboardService } from 'src/app/services/user-dashboard.service';
+import { YesNoDialogComponent } from 'src/app/dialogs/yesno-dialog/yesno-dialog.component';
+import { ErrorHandlerService } from 'src/app/services/error-handler-service.service';
+import { UserDashboardService, Vehicle } from 'src/app/services/user-dashboard.service';
 
 @Component({
   selector: 'app-vehicle',
@@ -14,63 +14,89 @@ import { UserDashboardService } from 'src/app/services/user-dashboard.service';
 })
 export class VehicleComponent implements OnInit, OnDestroy{
 
-  // vehicle declaration
+  public vehicle: Vehicle = null!;
+  vehicleSubscription: Subscription = new Subscription();
+
+constructor(private errorHandler:ErrorHandlerService, private activatedRoute: ActivatedRoute, 
+   private router: Router,
+   private userDashboardService: UserDashboardService,
+   public dialog: MatDialog){}
+
   public plateNumber: string = '';
-  private paramsSubscription = new Subscription();
-
-  constructor(private userDashboardService: UserDashboardService, 
-    private changeDetectorRef: ChangeDetectorRef,
-    private router: Router,
-    public dialog: MatDialog,
-    public datePipe: DatePipe,
-    private activatedRoute: ActivatedRoute){}
-
+  private activatedRouteSubscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.plateNumber = this.activatedRoute.snapshot.params['plateNumber'];
-    this.paramsSubscription = this.activatedRoute.params.subscribe((params: Params) => {
-      this.plateNumber = params['plateNumber'];
-    })
+    this.activatedRouteSubscription = this.activatedRoute.params.subscribe(
+      {
+        next: (params: Params) => {
+          this.vehicle = null!;
+          this.plateNumber = params['plateNumber'];
+          if(this.plateNumber){
+            this.loadVehicle(this.plateNumber);
+          }
+        },
+        error: (e) => {},
+        complete: () => {}
+      }
+    );
   }
 
   ngOnDestroy(): void {
-    this.paramsSubscription.unsubscribe();
+    this.activatedRouteSubscription.unsubscribe();
+    this.vehicleSubscription.unsubscribe();
   }
 
-  public addVehicleForm = new FormGroup({
-    vehiclePlateNumber: new FormControl('', [Validators.required, Validators.minLength(4)]),
-    vehicleType: new FormControl('', [Validators.required]),
-    electricVehicle: new FormControl('', [Validators.required])
-  });
+  private loadVehicle(plateNumber: string){
+    this.vehicleSubscription = this.userDashboardService.getVehicles().subscribe( (vehicle : Vehicle[]) => {
+      vehicle.forEach(vehicle => {
+        console.log(vehicle.plateNumber);
+        if(vehicle.plateNumber === plateNumber){
+          this.vehicle = vehicle;
+          return;
+        }
+      })
+    })
+  }
+ 
 
-  public submitAddVehicleForm(){
-    console.log(this.addVehicleForm.value);
-    //this.error = '';
-    const vehiclePlateNumber: string = this.addVehicleForm.value.vehiclePlateNumber!;
-    const vehicleType: string = this.addVehicleForm.value.vehicleType!;
-    const electricVehicle: string = this.addVehicleForm.value.electricVehicle!;
+  openRemoveVehicleDialog(vehiclePlateNumber: string): void {
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
+      width: '350px',
+      data: {title: "Remove " + vehiclePlateNumber + '?', content: 'The vehicle will be removed from your account.'}
+    });
 
-    this.userDashboardService.addVehicle({
-      vehicleType: vehicleType,
-      plateNumber: vehiclePlateNumber,
-      isElectric: electricVehicle === 'true',
-      isParked: false
-    }).subscribe({
-      next: (vehicle) => {},
-      error: (e) => {},
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 'Yes'){
+        this.userDashboardService.removeVehicle(vehiclePlateNumber).subscribe({
+          // next: (vehicle) => {},
+          // error: (e) => {this.errorHandler.handleError(e.error);},
+          complete: () => {
+            this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+          }
+        });
+      }
+    });
+  }
+
+  public park(plateNumber: string){
+    this.userDashboardService.park(plateNumber).subscribe({
+      //next: (val) => {},
+      // error: (e) => {
+      //   console.log(e);
+      //    this.errorHandler.handleError(e.error);
+      // },
       complete: () => {
         const dialogRef = this.dialog.open(InfoDialogComponent, {
           width: '350px',
           data: {
             title: "Info", 
-            mainContent: `${vehiclePlateNumber} successfully added`,
+            mainContent: `${plateNumber} successfully parked`,
+            secondContent: `In the section of the \"Tickets\" you can see and pay your tickets.`
           }
         });
        
         dialogRef.afterClosed().subscribe(result => {
-         // this.loadVehicles();
-         // this.loadUserDetails();
-          this.addVehicleForm.reset();
+          this.router.navigate(['../../tickets'], {relativeTo: this.activatedRoute});
         });
       }
     });

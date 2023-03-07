@@ -1,16 +1,16 @@
 <div [formGroup]="signinForm" *ngIf="!isLoading" class="form-center">
     <label>Username</label>
     <input formControlName="username" type="text">
+    <small *ngIf="signinForm.get('username')?.touched && signinForm.get('username')?.hasError('required')" style="color: red">Username is required</small>
     <br>
     <label>Password</label>
     <input formControlName="password" type="password">
+    <small *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.hasError('required')" style="color: red">Password is required</small>
     <br>
     <button mat-stroked-button (click)="submitSigninForm()" color="primary">Log in</button>
     <br>
     <label>Do not have an account?</label>
     <button mat-stroked-button color="primary" routerLink="/signup">Sign up</button>
-    <p *ngIf="error" style="color: red;">{{error}}</p>
-    <app-alert [message]="error" *ngIf="error"></app-alert>
 </div>
 <div class="loader" *ngIf="isLoading">
     <mat-spinner></mat-spinner>

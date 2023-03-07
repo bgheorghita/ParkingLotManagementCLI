@@ -1,5 +1,20 @@
-<div></div>
-<div alert-box>
-    <p>{{ message }}</p>
-    <div> <button>Close</button></div>
+<div class="alert-box">
+  <mat-dialog-content>
+    <table>
+      <tr>
+        <td>
+          <mat-icon *ngIf="icon" >{{icon | lowercase}}</mat-icon> 
+        </td>
+        <td>
+            Error
+        </td>
+      </tr>
+    </table>
+    <p align="center">{{message}}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="center">
+    <button mat-raised-button color="primary" mat-dialog-close>
+      {{buttonText}}
+    </button>
+  </mat-dialog-actions>
 </div>

@@ -1,21 +1,25 @@
 <div [formGroup]="signupForm" *ngIf="!isLoading" class="form-center">
-    <label>Name</label>
+    <label>Username</label>
     <input formControlName="username" type="text">
+    <small *ngIf="signupForm.get('username')?.touched && signupForm.get('username')?.hasError('required')" style="color: red">Username is required</small>
+    <small *ngIf="signupForm.get('username')?.touched && signupForm.get('username')?.hasError('minlength')" style="color: red">Username must be minimum length of 4 characters.</small>
     <br>
     <label for="userType">User Type</label>
     <select name="userType" id="userType" formControlName="userType">
     <option value="REGULAR">REGULAR</option>
     <option value="VIP">VIP</option>
     </select>
+    <small *ngIf="signupForm.get('userType')?.touched && signupForm.get('userType')?.hasError('required')" style="color: red">UserType is required</small>
     <br>
     <label>Password</label>
     <input formControlName="password" type="password">
+    <small *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.hasError('required')" style="color: red">Password is required</small>
+    <small *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.hasError('minlength')" style="color: red">Password must be minimum length of 4 characters.</small>
     <br>
     <button mat-stroked-button (click)="submitSignupForm()" color="primary" routerLink="/signup">Sign up</button>
     <br>
     <label>Already have an account?</label>
     <button mat-stroked-button color="primary" routerLink="/signin">Sign in</button>
-    <p *ngIf="error" style="color: red;">{{error}}</p>
 </div>
 <div class="loader" *ngIf="isLoading">
     <mat-spinner></mat-spinner>

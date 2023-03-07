@@ -1,18 +1,17 @@
-
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
 
 .card {
   width: 100%;
-  /* background: rgb(239, 239, 239); */
-  
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  height: 84%;
 }
 
 .tile {
   width: 33%;
-  padding: 50px;
-  /* background: lightyellow; */
+  padding: 100px;
   align-items: center;
   justify-content: center;
 }
@@ -25,23 +24,26 @@
 }
 
 .card-header-car-image {
-background-image: url('../../../assets/car.png');
-background-size: cover;
-border-radius: 0%;
+  background-image: url('../../../assets/car.png');
+  background-size: cover;
+  border-radius: 0%;
 }
 
 .card-header-truck-image {
-background-image: url('../../../assets/truck.png');
-background-size: cover;
-border-radius: 0%;
+  background-image: url('../../../assets/truck.png');
+  background-size: cover;
+  border-radius: 0%;
 }
 
 
 .header {
-  padding: 25px;
-  text-align: center;
-  background: #1abc9c;
+  padding-top: 10px;
+  height: 6%;
+  background-color: #536DFE;
   color: white;
-  font-size: 30px;
-  /* margin-bottom: 5%; */
+}
+
+.h-center{
+  text-align: center;
+  vertical-align: middle;
 }

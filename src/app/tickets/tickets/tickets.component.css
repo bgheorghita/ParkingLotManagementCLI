@@ -1,0 +1,40 @@
+.header {
+    padding-top: 10px;
+    height: 6%;
+    background-color: #536DFE;
+    color: white;
+  }
+  
+.h-center{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.container {
+    position: relative;
+    height: 84%;
+}
+
+.centered-element {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+th {
+    border-bottom: 1px solid gray;
+    border-right: 1px solid gray;
+    text-align: center;
+}
+
+
+table {
+    border: 1px solid grey !important;
+} 
+
+.centered-text {
+    text-align: center;
+}

@@ -1,70 +1,13 @@
-<!-- <p>VehiclesComponent</p>
-<button (click)="add()"> Add</button>
-    <mat-grid-list cols="2" rowHeight="35rem"> 
-        <mat-grid-tile>
-            <router-outlet></router-outlet>
-        </mat-grid-tile>
-        
-    <mat-grid-tile class="card">
-        <mat-grid-tile-header class="center">Vehicles added to your account</mat-grid-tile-header>
-        <p *ngIf="vehicles.length == 0">You do not have any added vehicles to your account yet</p>
-        <mat-card class="tile" *ngFor="let vehicle of vehicleObserver | async">
-            <mat-card-header>
-            <div mat-card-avatar *ngIf="vehicle.vehicleType === 'MOTORCYCLE' " class="card-header-motorcycle-image"></div>
-            <div mat-card-avatar *ngIf="vehicle.vehicleType === 'CAR' " class="card-header-car-image"></div>
-            <div mat-card-avatar *ngIf="vehicle.vehicleType === 'TRUCK' " class="card-header-truck-image"></div>
-            <mat-card-title>{{ vehicle.plateNumber }}</mat-card-title>
-            <mat-card-subtitle>{{vehicle.vehicleType}}</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-            <p>{{vehicle.isElectric ? 'Electric' : 'Non Electric'}}</p>
-            </mat-card-content>
-            <mat-card-content>
-            <p>{{vehicle.isParked ? 'Parked' : 'Not Parked'}}</p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button color="primary" (click)="park(vehicle.plateNumber)" >Park</button>
-                <button mat-button color="warn" (click)="openRemoveVehicleDialog(vehicle.plateNumber)">Remove</button>
-            </mat-card-actions>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
-<mat-paginator [pageSizeOptions]="[1, 2, 3]" *ngIf="vehicles.length>0"></mat-paginator> -->
-
-<!-- <mat-sidenav-container class="example-container">
-    <mat-sidenav mode="side" opened>
-        <a [routerLink]="['all']">Display All</a>
-        <br>
-        <a [routerLink]="['plateNumber']">Display</a>
-        <br>
-        <a [routerLink]="['add']">Add</a>
-        <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Vehicles
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            This is the primary content of the panel.
-            <button mat-flat-button>Show all</button>
-            <button mat-flat-button>Add</button>
-            <button mat-flat-button>Show</button>
-          </mat-expansion-panel>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <router-outlet></router-outlet>
-    </mat-sidenav-content>
-</mat-sidenav-container> -->
-<!-- 
-<mat-grid-tile class="card">
-    <mat-grid-tile-header class="center">Vehicles added to your account</mat-grid-tile-header>
-    <p *ngIf="vehicles.length == 0">You do not have any added vehicles to your account yet</p>
-    
-</mat-grid-tile> -->
-<div class="header">
+<div class="header h-center">
     <h3>Vehicles in your account</h3>
 </div>
 
 <div class="card">
+    <div class="h-center" *ngIf="vehicles && vehicles.length==0">
+        <h3>You do not have vehicles in your account yet.</h3>
+        <button mat-stroked-button color="primary" [routerLink]="['add']">Add vehicle</button>
+    </div>
+
     <mat-card *ngFor="let vehicle of vehicleObserver | async" class="tile">
         <mat-card-header> 
         <div mat-card-avatar *ngIf="vehicle.vehicleType === 'MOTORCYCLE' " class="card-header-motorcycle-image"></div>
@@ -80,9 +23,8 @@
         <p>{{vehicle.isParked ? 'Parked' : 'Not Parked'}}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button color="primary" (click)="park(vehicle.plateNumber)" >Park</button>
-            <button mat-button color="warn" (click)="openRemoveVehicleDialog(vehicle.plateNumber)">Remove</button>
+            <button mat-button color="primary" [routerLink]="['./', vehicle.plateNumber]"  >View</button>
         </mat-card-actions>
     </mat-card>
 </div>
-<mat-paginator style="display: flex; justify-content: center;" [pageSizeOptions]="[1, 2, 3]"></mat-paginator>
+<mat-paginator *ngIf="vehicles && vehicles.length>0" style="display: flex; justify-content: center;" [pageSizeOptions]="[1, 2, 3]"></mat-paginator>

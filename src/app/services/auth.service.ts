@@ -6,7 +6,7 @@ import { User } from '../models/User';
 import jwt_decode from "jwt-decode";
 
 export interface Token{
-  roles: [],
+  roles: string[],
   userType: string,
   sub: string,
   iat: string,
@@ -61,23 +61,9 @@ export class AuthService {
   }
 
   private errorHandling(e: HttpErrorResponse){
-    console.log(e);
-    let errorMessage = 'An error has occured.';
-    if(!e.error || !e.error.error){
-      return throwError(() => errorMessage);
-    }
-    console.log("error handling: " + e.message);
-    switch(e.error.message){
-      case 'SPECIFIC_ERROR':{
-        errorMessage = 'A description';
-        break;
-      }
-      default:{
-        errorMessage = e.error.message;
-      }
-    }
-    return throwError(() => errorMessage);
-  }
+     //ErrorHandlerService can be used to display custom message error
+     return throwError(() => e);
+  } 
 
   logout(){
     this.user.next(null!);
@@ -101,7 +87,7 @@ export class AuthService {
     const userObj: {
       _username: string,
       _userType: string,
-      _roles: [],
+      _roles: string[],
       _token: string,
       _tokenExpirationDateInMillis: string,
       _isValidatedAccount: boolean

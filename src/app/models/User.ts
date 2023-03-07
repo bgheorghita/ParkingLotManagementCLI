@@ -4,7 +4,7 @@ export class User {
       constructor(
     private _username: string, 
     private _userType: string,
-    private _roles: [],
+    private _roles: string[],
     private _token: string,
     private _tokenExpirationDateInMillis: string,
     private _isValidatedAccount: boolean){}

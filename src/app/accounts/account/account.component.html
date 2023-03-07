@@ -1,0 +1,44 @@
+<div class="header h-center">
+  <h3>Account details</h3>
+</div>
+
+<mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        General Details
+      </mat-panel-title>
+      <mat-panel-description>
+        Details about your account
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list-item>{{ "Username: " + (userDetails ? userDetails.username : 'Not set') }}</mat-list-item>
+    <mat-list-item>{{ "UserType: " + (userDetails ? userDetails.userType : 'Not set') }}</mat-list-item>
+    <mat-list-item>{{ "Account Validated: " + (userDetails ? (userDetails.isValidated ? 'Yes' : 'No') : 'Not set') }}</mat-list-item>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Stored Vehicles
+      </mat-panel-title>
+      <mat-panel-description>
+        Vehicles stored in your account
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list *ngIf="userDetails">
+      <mat-list-item *ngIf="userDetails.vehiclePlateNumbers.length == 0">{{ 'You do not have any stored vehicles yet' }}</mat-list-item>
+      <mat-list-item *ngFor="let vehiclePlateNumber of userDetails.vehiclePlateNumbers">{{ vehiclePlateNumber }}</mat-list-item>
+    </mat-list>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Options
+      </mat-panel-title>
+      <mat-panel-description>
+        Available options regarding your account
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <button mat-button color="warn">Delete account</button>
+  </mat-expansion-panel>

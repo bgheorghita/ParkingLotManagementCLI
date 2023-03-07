@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorHandlerService } from 'src/app/services/error-handler-service.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,45 +11,38 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SignupComponent {
    isLoading: boolean = false;
-   error:string = '';
 
-   constructor(private authService: AuthService, private router: Router){}
+   constructor(private errorHandler:ErrorHandlerService, private authService: AuthService, private router: Router){}
    
-
   public signupForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required, Validators.minLength(4)]),
     userType: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
 
   public submitSignupForm(){
-    this.error = '';
-    console.log(this.signupForm.value);
     const username: string = this.signupForm.value.username!;
     const userType: string = this.signupForm.value.userType!;
     const password: string = this.signupForm.value.password!;
 
-    console.log("username: " + username);
-    console.log("user: " + userType);
-    console.log("pass: " + password);
+    if(!this.signupForm.valid){
+      this.signupForm.markAllAsTouched();
+      return;
+    }
 
     this.isLoading = true;
     this.authService.signup(username, userType, password).subscribe(
       {
-        next: (response) => {
-          console.log("response: ");
-          console.log(response);
+        next: () => {
           this.isLoading = false;
-          this.router.navigate(['/user-dashboard']);
       },
       error: (error) => {
-        console.log(error);
-        this.error = error;
         this.isLoading = false;
+        this.errorHandler.handleError(error);
       },
       complete: () => {
-        console.log("completed");
         this.isLoading = false;
+        this.router.navigate(['/user-dashboard/vehicles']);
       }
    });
 

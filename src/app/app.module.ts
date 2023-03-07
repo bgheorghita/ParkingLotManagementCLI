@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
@@ -35,15 +35,14 @@ import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AuthFormValidatorComponent } from './validators/auth-form-validator/auth-form-validator.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { ParkingLotComponent } from './parking-lot/parking-lot.component';
@@ -53,21 +52,21 @@ import { AdminDashboardComponent } from './dashboards/admin-dashboard/admin-dash
 import { AlertComponent } from './alert/alert/alert.component';
 import { YesNoDialogComponent } from './dialogs/yesno-dialog/yesno-dialog.component';
 import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
-import { TicketsComponent } from './dashboards/user-dashboard/tickets/tickets/tickets.component';
-import { ShowTicketsComponent } from './dashboards/user-dashboard/tickets/show-tickets/show-tickets.component';
-import { ShowAccountComponent } from './dashboards/user-dashboard/accounts/show-account/show-account.component';
 import { VehiclesComponent } from './vehicles/vehicles/vehicles.component';
 import { VehicleComponent } from './vehicles/vehicle/vehicle.component';
 import { AddVehicleComponent } from './vehicles/add-vehicle/add-vehicle.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AccountComponent } from './accounts/account/account.component';
+import { TicketsComponent } from './tickets/tickets/tickets.component';
+import { ErrorHandlerService } from './services/error-handler-service.service';
+import { UsersComponent } from './users/users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    AuthFormValidatorComponent,
     SigninComponent,
     SignupComponent,
     ParkingLotComponent,
@@ -76,13 +75,14 @@ import { AuthGuardService } from './services/auth-guard.service';
     AlertComponent,
     YesNoDialogComponent,
     InfoDialogComponent,
-    TicketsComponent,
-    ShowTicketsComponent,
-    ShowAccountComponent,
     VehiclesComponent,
     VehicleComponent,
     AddVehicleComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AccountComponent,
+    TicketsComponent,
+    AlertComponent,
+    UsersComponent
   ],
   imports: [
     AppRoutingModule,
@@ -121,9 +121,14 @@ import { AuthGuardService } from './services/auth-guard.service';
     MatPaginatorModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule, DatePipe, CommonModule
+    HttpClientModule, 
+    DatePipe, 
+    CommonModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, DatePipe, AuthGuardService],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true}, 
+    DatePipe, AuthGuardService, 
+    { provide: ErrorHandler, useClass: ErrorHandlerService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

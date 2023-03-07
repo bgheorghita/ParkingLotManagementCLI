@@ -1,143 +1,54 @@
-  <mat-sidenav-container class="container">
-    <mat-sidenav mode="side" opened class="sidenav">
-        <button [ngClass]="usersViewActivated ? 'sidenav-button-clicked' :  'sidenav-button'" mat-stroked-button (click)="showUsers()">Users</button>
-        <button [ngClass]="vehiclesViewActivated ? 'sidenav-button-clicked' :  'sidenav-button'" mat-stroked-button (click)="activateVehiclesView()">Vehicles</button>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        Main content
-        <div *ngIf="usersViewActivated">
-          Users view activated
-          <mat-form-field>
-            <mat-label>Filter</mat-label>
-            <input matInput (keyup)="applyFilter($event)" #input>
-          </mat-form-field>
-          <table mat-table [dataSource]="userDetailsDataSource" multiTemplateDataRows class="mat-elevation-z8">
-            <ng-container matColumnDef="{{ column }}" *ngFor="let column of userDetailsTableColumns">
-              <th mat-header-cell *matHeaderCellDef> {{ column }} </th>
-              <td mat-cell *matCellDef="let element">
-                 {{ element[column] === false ? 'No' : (element[column] === true ? 'Yes' : element[column]) }} 
-              </td>
-            </ng-container>
-            <ng-container matColumnDef="expand">
-              <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-              <td mat-cell *matCellDef="let element">
-                <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
-                  <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
-                  <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
-                </button>
-              </td>
-            </ng-container>
-
-            <ng-container matColumnDef="expandedDetail">
-              <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-                <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                  <p>Vehicles</p>
-                  <mat-list>
-                    <mat-list-item *ngFor="let plateNumber of element.vehiclePlateNumbers">
-                      <p style="float:left">{{ plateNumber }}</p>
-                      <p style="float:right"><button mat-flat-button color="warn">Remove</button></p>
-                    </mat-list-item>
-                  </mat-list>
-                  <p>Options</p>
-                  <button mat-flat-button color="primary">Validate</button>  
-                </div>
-              </td>
-            </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
-      class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                           showFirstLastButtons
-                           aria-label="Select page of periodic elements">
-</mat-paginator>
-<!-- 
- <mat-sidenav-container class="container">
-    <mat-sidenav mode="side" opened class="sidenav">
-        <button [ngClass]="usersViewActivated ? 'sidenav-button-clicked' :  'sidenav-button'" mat-stroked-button (click)="showUsers()">Users</button>
-        <button [ngClass]="vehiclesViewActivated ? 'sidenav-button-clicked' :  'sidenav-button'" mat-stroked-button (click)="activateVehiclesView()">Vehicles</button>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        Main content
-        <div *ngIf="usersViewActivated">
-          <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="userDetailsDataSource">
-          
-              <ng-container matColumnDef="username">
-                <th mat-header-cell *matHeaderCellDef> Username </th>
-                <td mat-cell *matCellDef="let user"> {{ user.username }} </td>
-              </ng-container>
-          
-              <ng-container matColumnDef="userType">
-                <th mat-header-cell *matHeaderCellDef> User type </th>
-                <td mat-cell *matCellDef="let user"> {{ user.userType }} </td>
-              </ng-container>
-          
-              <ng-container matColumnDef="vehiclePlateNumbers">
-                <th mat-header-cell *matHeaderCellDef> Vehicle Plate Numbers </th>
-                <td mat-cell *matCellDef="let user"> 
-                  <mat-list>
-                    <mat-list-item *ngFor="let plateNumber of user.vehiclePlateNumbers">
-                      <p style="float:left">{{ plateNumber }}</p>
-                      <p style="float:right"><button mat-flat-button color="warn">Remove</button></p>
-                    </mat-list-item>
-                  </mat-list>
-                 </td>
-              </ng-container>
-
-              <ng-container matColumnDef="expand">
-                <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
-                <td mat-cell *matCellDef="let element">
-                  <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
-                    <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
-                    <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
-                  </button>
+<mat-sidenav-container class="app-container">
+  <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
+      <mat-nav-list>
+          <mat-list-item routerLink="/admin-dashboard">
+            <table>
+              <tr>
+                <td>
+                  <mat-icon>dashboard</mat-icon>
                 </td>
-              </ng-container>
-              <ng-container matColumnDef="expandedDetail">
-                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
-                  <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                    <p>Vehicles</p>
-                    <mat-list>
-                      <mat-list-item *ngFor="let plateNumber of element.vehiclePlateNumbers">
-                        <p style="float:left">{{ plateNumber }}</p>
-                        <p style="float:right"><button mat-flat-button color="warn">Remove</button></p>
-                      </mat-list-item>
-                    </mat-list>
-                    <p>Options</p>
-                    <button mat-flat-button color="primary">Validate</button>  
-                  </div>
+                <td>
+                  <span>Admin Dashboard</span>
                 </td>
-              </ng-container>
-          
-              <ng-container matColumnDef="isValidated">
-                <th mat-header-cell *matHeaderCellDef> Validated </th>
-                <td mat-cell *matCellDef="let user"> {{ user.isValidated ? 'Yes' : 'No' }} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="options">
-                <th mat-header-cell *matHeaderCellDef> Options </th>
-                <td mat-cell *matCellDef="let user"> 
-                  <button mat-flat-button color="primary">Validate</button>  
-                </td>
-                
-              </ng-container>
-          
-              <tr mat-header-row *matHeaderRowDef="userDetailsTableColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: userDetailsTableColumns;"></tr>
+              </tr>
             </table>
-          
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]"
-                           showFirstLastButtons
-                           aria-label="Select page of periodic elements">
-            </mat-paginator>
-          </div>
-        </div>
-        <p *ngIf="vehiclesViewActivated">Vehicles view activated</p>
-    </mat-sidenav-content>
-  </mat-sidenav-container> -->
+          </mat-list-item>
+          <mat-expansion-panel [class.mat-elevation-z0]="true">
+              <mat-expansion-panel-header>
+                  Users
+              </mat-expansion-panel-header>
+              <mat-nav-list>
+                  <a mat-list-item [routerLink]="['users']">
+                    <table>
+                      <tr>
+                        <td>
+                          <mat-icon>view_array</mat-icon>
+                        </td>
+                        <td>
+                          <span>View all</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </a>
+                  <!-- <a mat-list-item [routerLink]="['users/validated']">
+                    <table>
+                      <tr>
+                        <td>
+                          <mat-icon>view_array</mat-icon>
+                        </td>
+                        <td>
+                          <span>Validated</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </a> -->
+              </mat-nav-list>
+            </mat-expansion-panel>
+          </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="app-sidenav-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container> 

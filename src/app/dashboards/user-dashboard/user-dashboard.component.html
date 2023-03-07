@@ -2,7 +2,16 @@
   <mat-sidenav #sidenav mode="side" opened class="app-sidenav">
       <mat-nav-list>
           <mat-list-item routerLink="/user-dashboard">
-              <mat-icon>dashboard</mat-icon><span>Dashboard</span>
+            <table>
+                <tr>
+                    <td>
+                        <mat-icon>dashboard</mat-icon>
+                    </td>
+                    <td>
+                        <span>Dashboard</span>
+                    </td>
+                </tr>
+            </table>
           </mat-list-item>
           <mat-expansion-panel [class.mat-elevation-z0]="true">
               <mat-expansion-panel-header>
@@ -10,10 +19,28 @@
               </mat-expansion-panel-header>
               <mat-nav-list>
                   <a mat-list-item [routerLink]="['vehicles']">
-                      <mat-icon>view_array</mat-icon><span>View all</span>
+                    <table>
+                        <tr>
+                            <td>
+                                <mat-icon>view_array</mat-icon>
+                            </td>
+                            <td>
+                                <span>View all</span>
+                            </td>
+                        </tr>
+                    </table>
                   </a>
                   <a mat-list-item [routerLink]="['vehicles/add']">
-                      <mat-icon>save</mat-icon><span>Add</span>
+                    <table>
+                        <tr>
+                            <td>
+                                <mat-icon>save</mat-icon>
+                            </td>
+                            <td>
+                                <span>Add</span>
+                            </td>
+                        </tr>
+                    </table>
                   </a>
               </mat-nav-list>
           </mat-expansion-panel>
@@ -22,8 +49,17 @@
                   Tickets
               </mat-expansion-panel-header>
               <mat-nav-list>
-                  <a mat-list-item routerLink="#">
-                      <mat-icon>view_array</mat-icon><span>View all</span>
+                  <a mat-list-item [routerLink]="['tickets']">
+                    <table>
+                        <tr>
+                            <td>
+                                <mat-icon>view_array</mat-icon>
+                            </td>
+                            <td>
+                                <span>View all</span>
+                            </td>
+                        </tr>
+                    </table>
                   </a>
               </mat-nav-list>
           </mat-expansion-panel>
@@ -32,9 +68,17 @@
                   Account
               </mat-expansion-panel-header>
               <mat-nav-list>
-                  <a mat-list-item routerLink="#">
-                    <mat-icon>details</mat-icon>
-                    Details
+                  <a mat-list-item [routerLink]="['account']">
+                    <table>
+                        <tr>
+                            <td>
+                                <mat-icon>details</mat-icon>
+                            </td>
+                            <td>
+                                <span>Details</span>
+                            </td>
+                        </tr>
+                    </table>
                   </a>
               </mat-nav-list>
           </mat-expansion-panel>
@@ -46,155 +90,3 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container> 
-
-<!-- <nav [tabPanel]="tabPanel" mat-tab-nav-bar backgroundColor="primary">
-    <a mat-tab-link label="Vehicles" [routerLink]="['vehicles']">Vehicles</a>
-    <a mat-tab-link label="Tickets" [routerLink]="['tickets']">Tickets</a>
-    <a mat-tab-link label="Account"  [routerLink]="['account']">Account</a>
-</nav>
-
-<mat-tab-nav-panel #tabPanel>
-  <router-outlet></router-outlet>
-</mat-tab-nav-panel>
- -->
-
- <!-- [routerLinkActiveOptions]="{exact: true}"  -->
- <!-- routerLinkActive="active" -->
-
-
-        <!-- <mat-grid-list cols="2" rowHeight="35rem"> 
-            <mat-grid-tile>
-              <mat-grid-tile-header class="center">Add a vehicle to your account</mat-grid-tile-header>
-                <div class="form" [formGroup]="addVehicleForm">
-                  <mat-label>Vehicle's Plate Number</mat-label>
-                    <mat-form-field appearance="outline">
-                        <input matInput formControlName="vehiclePlateNumber">
-                      </mat-form-field>
-                      <mat-label>Vehicle Type</mat-label>
-                      <mat-form-field appearance="outline"> 
-                        <mat-select formControlName="vehicleType">
-                          <mat-option value="MOTORCYCLE">MOTORCYCLE</mat-option>
-                          <mat-option value="CAR">CAR</mat-option>
-                          <mat-option value="TRUCK">TRUCK</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      <mat-label>Power Source</mat-label>
-                      <mat-form-field appearance="outline">
-                        <mat-select formControlName="electricVehicle">
-                          <mat-option value="true">Electric</mat-option>
-                          <mat-option value="false">Non Electric</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      <button mat-stroked-button color="primary" (click)="submitAddVehicleForm()">Add vehicle</button>
-                </div>
-            </mat-grid-tile>
-            <mat-grid-tile class="card">
-              <mat-grid-tile-header class="center">Vehicles added to your account</mat-grid-tile-header>
-              <p *ngIf="vehicles.length == 0">You do not have any added vehicles to your account yet</p>
-                <mat-card class="tile" *ngFor="let vehicle of vehicleObserver | async">
-                  <mat-card-header>
-                  <div mat-card-avatar *ngIf="vehicle.vehicleType === 'MOTORCYCLE' " class="card-header-motorcycle-image"></div>
-                  <div mat-card-avatar *ngIf="vehicle.vehicleType === 'CAR' " class="card-header-car-image"></div>
-                  <div mat-card-avatar *ngIf="vehicle.vehicleType === 'TRUCK' " class="card-header-truck-image"></div>
-                  <mat-card-title>{{ vehicle.plateNumber }}</mat-card-title>
-                  <mat-card-subtitle>{{vehicle.vehicleType}}</mat-card-subtitle>
-                  </mat-card-header>
-                  <mat-card-content>
-                  <p>{{vehicle.isElectric ? 'Electric' : 'Non Electric'}}</p>
-                  </mat-card-content>
-                  <mat-card-content>
-                    <p>{{vehicle.isParked ? 'Parked' : 'Not Parked'}}</p>
-                    </mat-card-content>
-                  <mat-card-actions>
-                      <button mat-button color="primary" (click)="park(vehicle.plateNumber)" >Park</button>
-                      <button mat-button color="warn" (click)="openRemoveVehicleDialog(vehicle.plateNumber)">Remove</button>
-                  </mat-card-actions>
-              </mat-card>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <mat-paginator [pageSizeOptions]="[1, 2, 3]" *ngIf="vehicles.length > 0"></mat-paginator> -->
-    <!-- </mat-tab> -->
-    
-    <!-- <mat-tab label="Tickets"> -->
-      <!-- <p *ngIf="tickets.length == 0" class="center-screen">You have not parked a vehicle yet, therefore no ticket has been generated.</p>
-      <table mat-table [dataSource]="ticketDataSource" class="mat-elevation-z8" *ngIf="tickets.length > 0">
-        <ng-container matColumnDef="vehiclePlateNumber">
-          <th mat-header-cell *matHeaderCellDef> Vehicle Plate Number </th>
-          <td mat-cell *matCellDef="let ticket"> {{ticket.vehiclePlateNumber}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="parkingSpotNumber">
-          <th mat-header-cell *matHeaderCellDef> Parking Spot Number </th>
-          <td mat-cell *matCellDef="let ticket"> {{ticket.parkingSpotNumber}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="parkingSpotType">
-          <th mat-header-cell *matHeaderCellDef> Parking Spot Type </th>
-          <td mat-cell *matCellDef="let ticket"> {{ticket.parkingSpotType}} </td>
-        </ng-container>
-      
-        <ng-container matColumnDef="timestampParkAt">
-          <th mat-header-cell *matHeaderCellDef> Parked At </th>
-          <td mat-cell *matCellDef="let ticket"> {{ ticket.timestampParkAt | date:'yyyy-MM-dd HH:mm' }} </td>
-        </ng-container>
-
-         <ng-container matColumnDef="options">
-          <th mat-header-cell *matHeaderCellDef> Options </th>
-          <td mat-cell *matCellDef="let ticket"> 
-            <button mat-stroked-button color="primary" (click)="openPayDialog(ticket.vehiclePlateNumber)">Pay</button>
-          </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="displayedTicketColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedTicketColumns;"></tr>
-      </table>
-      <mat-paginator *ngIf="tickets.length > 0" [pageSizeOptions]="[5, 8, 10]"
-                 showFirstLastButtons
-                 aria-label="Select page tickets">
-  </mat-paginator> -->
-    <!-- </mat-tab>
-    <mat-tab label="Account Details">  -->
-      <!-- <mat-accordion>
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              General Details
-            </mat-panel-title>
-            <mat-panel-description>
-              Details about your account
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-list-item>{{ "Username: " + (userDetails ? userDetails.username : 'Not set') }}</mat-list-item>
-          <mat-list-item>{{ "UserType: " + (userDetails ? userDetails.userType : 'Not set') }}</mat-list-item>
-          <mat-list-item>{{ "Account Validated: " + (userDetails ? (userDetails.isValidated ? 'Yes' : 'No') : 'Not set') }}</mat-list-item>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Stored Vehicles
-            </mat-panel-title>
-            <mat-panel-description>
-              Vehicles stored in your account
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <mat-list *ngIf="userDetails">
-            <mat-list-item *ngIf="userDetails.vehiclePlateNumbers.length == 0">{{ 'You do not have any stored vehicles yet' }}</mat-list-item>
-            <mat-list-item *ngFor="let vehiclePlateNumber of userDetails.vehiclePlateNumbers">{{ vehiclePlateNumber }}</mat-list-item>
-          </mat-list>
-        </mat-expansion-panel>
-
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Options
-            </mat-panel-title>
-            <mat-panel-description>
-              Available options regarding your account
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <button mat-button color="warn">Delete account</button>
-        </mat-expansion-panel>
-      </mat-accordion> -->
-    <!-- </mat-tab>
-</mat-tab-group> -->

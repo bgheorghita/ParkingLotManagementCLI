@@ -6,12 +6,15 @@ import { HomeComponent } from './home/home.component';
 import { ParkingLotComponent } from './parking-lot/parking-lot.component';
 import { UserDashboardComponent } from './dashboards/user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './dashboards/admin-dashboard/admin-dashboard.component';
-import { ShowTicketsComponent } from './dashboards/user-dashboard/tickets/show-tickets/show-tickets.component';
-import { ShowAccountComponent } from './dashboards/user-dashboard/accounts/show-account/show-account.component';
 import { VehiclesComponent } from './vehicles/vehicles/vehicles.component';
 import { AddVehicleComponent } from './vehicles/add-vehicle/add-vehicle.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AccountComponent } from './accounts/account/account.component';
+import { TicketsComponent } from './tickets/tickets/tickets.component';
+import { VehicleComponent } from './vehicles/vehicle/vehicle.component';
+import { UsersComponent } from './users/users/users.component';
+import { AuthorizationGuard } from './services/authorization-guard.guard';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -34,16 +37,26 @@ const routes: Routes = [
         component: AddVehicleComponent
       },
       {
+        path: 'vehicles/:plateNumber',
+        component: VehicleComponent
+      },
+      {
         path: 'tickets',
-        component: ShowTicketsComponent
+        component: TicketsComponent
       },
       {
         path: 'account',
-        component: ShowAccountComponent
+        component: AccountComponent
       }
     ]
   },
-  {path: 'admin-dashboard', component: AdminDashboardComponent},
+  { path: 'admin-dashboard',
+    component: AdminDashboardComponent,
+    canActivate: [AuthorizationGuard],
+    children: [
+      { path: 'users', component: UsersComponent }
+    ]
+  },
   {path: '', component: HomeComponent},
   {path: '**', redirectTo: '/not-found'}
 ];

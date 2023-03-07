@@ -1,0 +1,12 @@
+.header {
+    padding-top: 10px;
+    height: 6%;
+    background-color: #536DFE;
+    color: white;
+  }
+  
+.h-center{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 90px; 
+}

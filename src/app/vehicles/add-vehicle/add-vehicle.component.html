@@ -1,33 +1,33 @@
-<mat-card class="card">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title> Add vehicles to your account</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="form" [formGroup]="addVehicleForm">
-            <mat-label>Vehicle's Plate Number</mat-label>
-            <mat-form-field appearance="outline">
-                <input matInput formControlName="vehiclePlateNumber">
-                </mat-form-field>
-                <mat-label>Vehicle Type</mat-label>
-                <mat-form-field appearance="outline"> 
-                <mat-select formControlName="vehicleType">
-                    <mat-option value="MOTORCYCLE">MOTORCYCLE</mat-option>
-                    <mat-option value="CAR">CAR</mat-option>
-                    <mat-option value="TRUCK">TRUCK</mat-option>
-                </mat-select>
-                </mat-form-field>
-                <mat-label>Power Source</mat-label>
-                <mat-form-field appearance="outline">
-                <mat-select formControlName="electricVehicle">
-                    <mat-option value="true">Electric</mat-option>
-                    <mat-option value="false">Non Electric</mat-option>
-                </mat-select>
-                </mat-form-field>
-                <button mat-stroked-button color="primary" (click)="submitAddVehicleForm()">Add vehicle</button>
-        </div>
-    </mat-card-content>
-  </mat-card>
+<div class="header h-center">
+    <h3>Add vehicles to your account</h3>
+</div>
 
-
-
+<div class="container">
+    <div class="form centered" [formGroup]="addVehicleForm">
+        <mat-label>Vehicle's Plate Number</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput formControlName="vehiclePlateNumber">
+        </mat-form-field>
+        <small *ngIf="addVehicleForm.get('vehiclePlateNumber')?.hasError('required') && addVehicleForm.get('vehiclePlateNumber')?.touched" style="margin-top: -10px; color: red">Vehicles's plate number is required.</small>
+        <small *ngIf="addVehicleForm.get('vehiclePlateNumber')?.hasError('minlength') && addVehicleForm.get('vehiclePlateNumber')?.touched" style="margin-top: -10px; color: red">Minumum length must be 4.</small>
+        <small *ngIf="addVehicleForm.get('vehiclePlateNumber')?.hasError('pattern') && addVehicleForm.get('vehiclePlateNumber')?.touched" style="margin-top: -10px; color: red">Spaces are not allowed.</small>
+        <mat-label>Vehicle Type</mat-label>
+        <mat-form-field appearance="outline"> 
+            <mat-select formControlName="vehicleType">
+                <mat-option value="MOTORCYCLE">MOTORCYCLE</mat-option>
+                <mat-option value="CAR">CAR</mat-option>
+                <mat-option value="TRUCK">TRUCK</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <small *ngIf="addVehicleForm.get('vehicleType')?.invalid && addVehicleForm.get('vehicleType')?.touched" style="margin-top: -10px; color: red">Vehicles Type is required.</small>
+        <mat-label>Power Source</mat-label>
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="electricVehicle">
+                <mat-option value="true">Electric</mat-option>
+                <mat-option value="false">Non Electric</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <small *ngIf="addVehicleForm.get('electricVehicle')?.invalid && addVehicleForm.get('electricVehicle')?.touched" style="margin-top: -10px; color: red">Power source is required.</small>
+        <button mat-stroked-button color="primary" (click)="submitAddVehicleForm()">Save vehicle</button>
+    </div>
+</div>

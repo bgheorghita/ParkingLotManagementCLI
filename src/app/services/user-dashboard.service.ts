@@ -12,8 +12,10 @@ export interface Vehicle{
 
 export interface Ticket{
   vehiclePlateNumber: string,
+  isElectricVehicle: boolean,
   parkingSpotNumber: string,
   parkingSpotType: string,
+  isParkingSpotWithElectricCharger: boolean,
   timestampParkAt: Date
 }
 
@@ -61,11 +63,14 @@ export class UserDashboardService {
   getTickets() : Observable<any>{
     return this.http.get<Ticket[]>('http://localhost:8080/api/v1/dashboard/user/tickets').pipe(
       map((tickets) => {
+        console.log(tickets);
         return tickets.map((ticket: Ticket) => (
           {
             vehiclePlateNumber: ticket.vehiclePlateNumber,
+            isElectricVehicle: ticket.isElectricVehicle,
             parkingSpotNumber: ticket.parkingSpotNumber,
             parkingSpotType: ticket.parkingSpotType,
+            isParkingSpotWithElectricCharger: ticket.isParkingSpotWithElectricCharger,
             timestampParkAt: ticket.timestampParkAt
           }
           ))
