@@ -41,26 +41,27 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { HomeComponent } from './home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { SigninComponent } from './auth/signin/signin.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { ParkingLotComponent } from './parking-lot/parking-lot.component';
-import { UserDashboardComponent } from './dashboards/user-dashboard/user-dashboard.component';
-import { AuthInterceptorService } from './services/auth-interceptor.service';
-import { AdminDashboardComponent } from './dashboards/admin-dashboard/admin-dashboard.component';
-import { AlertComponent } from './alert/alert/alert.component';
-import { YesNoDialogComponent } from './dialogs/yesno-dialog/yesno-dialog.component';
-import { InfoDialogComponent } from './dialogs/info-dialog/info-dialog.component';
-import { VehiclesComponent } from './vehicles/vehicles/vehicles.component';
-import { VehicleComponent } from './vehicles/vehicle/vehicle.component';
-import { AddVehicleComponent } from './vehicles/add-vehicle/add-vehicle.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthGuardService } from './services/auth-guard.service';
-import { AccountComponent } from './accounts/account/account.component';
-import { TicketsComponent } from './tickets/tickets/tickets.component';
-import { ErrorHandlerService } from './services/error-handler-service.service';
-import { UsersComponent } from './users/users/users.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SigninComponent } from './components/authentication/signin/signin.component';
+import { SignupComponent } from './components/authentication/signup/signup.component';
+import { ParkingLotComponent } from './components/parking-lot/parking-lot.component';
+import { UserDashboardComponent } from './components/dashboards/user-dashboard/user-dashboard.component';
+import { AuthInterceptorService } from './services/interceptors/auth-interceptor.service';
+import { AdminDashboardComponent } from './components/dashboards/admin-dashboard/admin-dashboard.component';
+import { AlertComponent } from './components/alert/alert.component';
+import { YesNoDialogComponent } from './components/dialogs/yesno-dialog/yesno-dialog.component';
+import { InfoDialogComponent } from './components/dialogs/info-dialog/info-dialog.component';
+import { VehiclesComponent } from './components/vehicles/vehicles.component';
+import { VehicleComponent } from './components/vehicles/vehicle/vehicle.component';
+import { AddVehicleComponent } from './components/vehicles/add-vehicle/add-vehicle.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { AuthGuardService } from './services/guards/auth-guard.service';
+import { AccountComponent } from './components/accounts/account/account.component';
+import { TicketsComponent } from './components/tickets/tickets.component';
+import { ErrorHandlerService } from './services/handlers/error-handler-service.service';
+import { UsersComponent } from './components/users/users.component';
+import { NotAuthorizedComponent } from './components/not-authorized/not-authorized.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { UsersComponent } from './users/users/users.component';
     AccountComponent,
     TicketsComponent,
     AlertComponent,
-    UsersComponent
+    UsersComponent,
+    NotAuthorizedComponent
   ],
   imports: [
     AppRoutingModule,
