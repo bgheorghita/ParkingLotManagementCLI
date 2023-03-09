@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../../services/authentication/auth.service';
+import { AuthService } from '../../services/tech/authentication/auth.service';
 
 @Component({
   selector: 'app-navbar',

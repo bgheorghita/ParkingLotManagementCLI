@@ -29,19 +29,19 @@
   
   
   .card-header-motorcycle-image {
-    background-image: url('../../../assets/motorcycle.png');
+    background-image: url('../../../../assets/motorcycle.png');
     background-size: cover;
     border-radius: 0%;
   }
   
   .card-header-car-image {
-    background-image: url('../../../assets/car.png');
+    background-image: url('../../../../assets/car.png');
     background-size: cover;
     border-radius: 0%;
   }
   
   .card-header-truck-image {
-    background-image: url('../../../assets/truck.png');
+    background-image: url('../../../../assets/truck.png');
     background-size: cover;
     border-radius: 0%;
   }

@@ -4,8 +4,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { InfoDialogComponent } from 'src/app/components/dialogs/info-dialog/info-dialog.component';
 import { YesNoDialogComponent } from 'src/app/components/dialogs/yesno-dialog/yesno-dialog.component';
-import { ErrorHandlerService } from 'src/app/services/handlers/error-handler-service.service';
-import { UserDashboardService, Vehicle } from 'src/app/services/dashboards/user-dashboard.service';
+import { ErrorHandlerService } from 'src/app/services/tech/handlers/error-handler-service.service';
+import { UserDashboardService, Vehicle } from 'src/app/services/bussiness/dashboards/user-dashboard.service';
 
 @Component({
   selector: 'app-vehicle',

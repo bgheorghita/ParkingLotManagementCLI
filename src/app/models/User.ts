@@ -1,4 +1,4 @@
-import { Token } from "../services/authentication/auth.service";
+import { Token } from "../services/tech/authentication/auth.service";
 
 export class User {
       constructor(

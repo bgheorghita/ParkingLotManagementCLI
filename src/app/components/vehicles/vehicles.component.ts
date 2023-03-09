@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription, Observable } from 'rxjs';
-import { UserDashboardService, Vehicle } from 'src/app/services/dashboards/user-dashboard.service';
+import { UserDashboardService, Vehicle } from 'src/app/services/bussiness/dashboards/user-dashboard.service';
 
 @Component({
   selector: 'app-vehicles',

@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { InfoDialogComponent } from 'src/app/components/dialogs/info-dialog/info-dialog.component';
 import { ParkingTime } from 'src/app/models/ParkingTime';
-import { Ticket, UserDashboardService, ParkingResult } from 'src/app/services/dashboards/user-dashboard.service';
+import { Ticket, UserDashboardService, ParkingResult } from 'src/app/services/bussiness/dashboards/user-dashboard.service';
 
 @Component({
   selector: 'app-tickets',

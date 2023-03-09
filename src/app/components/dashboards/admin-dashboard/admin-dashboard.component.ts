@@ -4,8 +4,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Subscription } from 'rxjs';
-import { AdminDashboardService } from 'src/app/services/dashboards/admin-dashboard.service';
-import { UserDetails } from 'src/app/services/dashboards/user-dashboard.service';
+import { AdminDashboardService } from 'src/app/services/bussiness/dashboards/admin-dashboard.service';
+import { UserDetails } from 'src/app/services/bussiness/dashboards/user-dashboard.service';
 
 @Component({
   selector: 'app-admin-dashboard',

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, NgZone } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AlertComponent } from '../../components/alert/alert.component';
+import { AlertComponent } from '../../../components/alert/alert.component';
 
 @Injectable({
   providedIn: 'root'

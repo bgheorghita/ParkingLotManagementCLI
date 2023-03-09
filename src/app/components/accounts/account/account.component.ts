@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs/internal/Subscription';
-import { UserDashboardService, UserDetails } from 'src/app/services/dashboards/user-dashboard.service';
+import { UserDashboardService, UserDetails } from 'src/app/services/bussiness/dashboards/user-dashboard.service';
 
 @Component({
   selector: 'app-account',

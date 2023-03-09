@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/authentication/auth.service';
-import { ErrorHandlerService } from 'src/app/services/handlers/error-handler-service.service';
+import { AuthService } from 'src/app/services/tech/authentication/auth.service';
+import { ErrorHandlerService } from 'src/app/services/tech/handlers/error-handler-service.service';
 
 @Component({
   selector: 'app-signin',

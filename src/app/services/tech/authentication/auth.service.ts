@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, Subject, tap, throwError } from 'rxjs';
-import { User } from '../../models/User';
+import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
+import { User } from '../../../models/User';
 import jwt_decode from "jwt-decode";
 
 export interface Token{

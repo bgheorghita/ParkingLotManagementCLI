@@ -9,12 +9,12 @@ import { AdminDashboardComponent } from './components/dashboards/admin-dashboard
 import { VehiclesComponent } from './components/vehicles/vehicles.component';
 import { AddVehicleComponent } from './components/vehicles/add-vehicle/add-vehicle.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { AuthGuardService } from './services/guards/auth-guard.service';
+import { AuthGuardService } from './services/tech/guards/auth-guard.service';
 import { AccountComponent } from './components/accounts/account/account.component';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { VehicleComponent } from './components/vehicles/vehicle/vehicle.component';
 import { UsersComponent } from './components/users/users.component';
-import { AuthorizationGuard } from './services/guards/authorization-guard.guard';
+import { AuthorizationGuard } from './services/tech/guards/authorization-guard.guard';
 import { NotAuthorizedComponent } from './components/not-authorized/not-authorized.component';
 
 const routes: Routes = [

@@ -5,7 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { InfoDialogComponent } from 'src/app/components/dialogs/info-dialog/info-dialog.component';
-import { UserDashboardService } from 'src/app/services/dashboards/user-dashboard.service';
+import { UserDashboardService } from 'src/app/services/bussiness/dashboards/user-dashboard.service';
 
 @Component({
   selector: 'app-add-vehicle',

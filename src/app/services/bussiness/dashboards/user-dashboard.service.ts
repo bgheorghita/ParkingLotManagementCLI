@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { AuthService } from '../authentication/auth.service';
+import { AuthService } from '../../tech/authentication/auth.service';
 
 export interface Vehicle{
   vehicleType: string,
