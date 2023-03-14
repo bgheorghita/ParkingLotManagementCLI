@@ -24,9 +24,10 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router){}
 
   private tokenExpirationTimer: any;
+  private baseUrl: string = 'http://localhost:8080';
 
   signup(username: string, userType: string, password: string){
-    return this.http.post('http://localhost:8080/api/v1/auth/register', {
+    return this.http.post(this.baseUrl + '/api/v1/auth/register', {
       username: username,
       userType: userType,
       password: password
@@ -37,7 +38,7 @@ export class AuthService {
   }
 
   signin(username: string, password: string){
-    return this.http.post('http://localhost:8080/api/v1/auth/authenticate', {
+    return this.http.post(this.baseUrl + '/api/v1/auth/authenticate', {
       username: username,
       password: password
     }, {responseType: 'text'})

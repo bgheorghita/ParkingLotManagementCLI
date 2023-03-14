@@ -1,6 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { UserDetails } from './user-dashboard.service';
@@ -11,9 +10,10 @@ import { UserDetails } from './user-dashboard.service';
 export class AdminDashboardService {
 
   constructor(private http: HttpClient) { }
+  private baseUrl: string = 'http://localhost:8080';
 
   getUnvalidatedUsers(): Observable<any>{
-    return this.http.get<UserDetails[]>('http://localhost:8080/api/v1/dashboard/admin/users/unvalidated').pipe(
+    return this.http.get<UserDetails[]>(this.baseUrl + '/api/v1/dashboard/admin/users/unvalidated').pipe(
       map((users: UserDetails[]) => {
         return users.map( (user: UserDetails) => ({
           userType: user.userType,
@@ -26,7 +26,7 @@ export class AdminDashboardService {
   }
 
   getUsers(): Observable<any>{
-    return this.http.get<UserDetails[]>('http://localhost:8080/api/v1/dashboard/admin/users').pipe(
+    return this.http.get<UserDetails[]>(this.baseUrl + '/api/v1/dashboard/admin/users').pipe(
       map((users: UserDetails[]) => {
         return users.map( (user: UserDetails) => ({
           userType: user.userType,
@@ -39,11 +39,11 @@ export class AdminDashboardService {
   }
 
   validateUser(username: string): Observable<any>{
-    return this.http.post<string>(`http://localhost:8080/api/v1/dashboard/admin/users/validate/${username}`, {});
+    return this.http.post<string>(this.baseUrl + `/api/v1/dashboard/admin/users/validate/${username}`, {});
   }
 
   invalidateUser(username: string): Observable<any>{
-    return this.http.post<string>(`http://localhost:8080/api/v1/dashboard/admin/users/invalidate/${username}`, {});
+    return this.http.post<string>(this.baseUrl + `/api/v1/dashboard/admin/users/invalidate/${username}`, {});
   }
 
 }

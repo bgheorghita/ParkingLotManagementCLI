@@ -42,10 +42,11 @@ export interface ParkingResult{
 export class UserDashboardService {
 
   constructor(private http: HttpClient, private authService: AuthService) { }
+  private baseUrl: string = 'http://localhost:8080';
 
   getVehicles() : Observable<any>{
     console.log("get");
-    return this.http.get<Vehicle[]>('http://localhost:8080/api/v1/dashboard/user/vehicle').pipe(
+    return this.http.get<Vehicle[]>(this.baseUrl + '/api/v1/dashboard/user/vehicle').pipe(
       map((vehicles) => {
         console.log(vehicles);
         return vehicles.map((vehicle : Vehicle) => (
@@ -61,7 +62,7 @@ export class UserDashboardService {
   }
 
   getTickets() : Observable<any>{
-    return this.http.get<Ticket[]>('http://localhost:8080/api/v1/dashboard/user/tickets').pipe(
+    return this.http.get<Ticket[]>(this.baseUrl + '/api/v1/dashboard/user/tickets').pipe(
       map((tickets) => {
         console.log(tickets);
         return tickets.map((ticket: Ticket) => (
@@ -79,11 +80,11 @@ export class UserDashboardService {
   }
 
   getUserDetails(): Observable<any>{
-    return this.http.get<UserDetails>('http://localhost:8080/api/v1/dashboard/user/account');
+    return this.http.get<UserDetails>(this.baseUrl + '/api/v1/dashboard/user/account');
   }
 
   park(plateNumber: string) : Observable<any>{
-    return this.http.post<Ticket>(`http://localhost:8080/api/v1/lot/in/${plateNumber}`, {}).pipe(
+    return this.http.post<Ticket>(this.baseUrl + `/api/v1/lot/in/${plateNumber}`, {}).pipe(
       map( (ticket: Ticket) => {
         return ({
             vehiclePlateNumber: ticket.vehiclePlateNumber,
@@ -97,7 +98,7 @@ export class UserDashboardService {
 
   addVehicle(vehicle: Vehicle){
     console.log(vehicle);
-      return this.http.post<Vehicle>('http://localhost:8080/api/v1/dashboard/user/vehicle/', {
+      return this.http.post<Vehicle>(this.baseUrl + '/api/v1/dashboard/user/vehicle/', {
         vehicleType: vehicle.vehicleType,
         plateNumber: vehicle.plateNumber,
         isElectric: vehicle.isElectric
@@ -105,11 +106,11 @@ export class UserDashboardService {
   }
   
   removeVehicle(plateNumber: string){
-    return this.http.delete<Vehicle>(`http://localhost:8080/api/v1/dashboard/user/vehicle/${plateNumber}`);
+    return this.http.delete<Vehicle>(this.baseUrl + `/api/v1/dashboard/user/vehicle/${plateNumber}`);
   }
 
   leaveParkingSpot(vehiclePlateNumber: string){
-    return this.http.post<ParkingResult>(`http://localhost:8080/api/v1/lot/out/${vehiclePlateNumber}`, {});
+    return this.http.post<ParkingResult>(this.baseUrl + `/api/v1/lot/out/${vehiclePlateNumber}`, {});
   }
 
 }
