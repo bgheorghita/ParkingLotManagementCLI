@@ -27,7 +27,13 @@
     </mat-expansion-panel-header>
     <mat-list *ngIf="userDetails">
       <mat-list-item *ngIf="userDetails.vehiclePlateNumbers.length == 0">{{ 'You do not have any stored vehicles yet' }}</mat-list-item>
-      <mat-list-item *ngFor="let vehiclePlateNumber of userDetails.vehiclePlateNumbers">{{ vehiclePlateNumber }}</mat-list-item>
+      <mat-list-item *ngFor="let vehiclePlateNumber of userDetails.vehiclePlateNumbers" 
+                [routerLink]="['/user-dashboard/vehicles/', vehiclePlateNumber]" 
+                id="clickable" 
+                [matTooltip]="'Display ' + vehiclePlateNumber + ' vehicle in a separate view'" 
+                [matTooltipPosition]="'right'">
+        {{ vehiclePlateNumber }}
+      </mat-list-item>
     </mat-list>
   </mat-expansion-panel>
 
@@ -40,5 +46,5 @@
         Available options regarding your account
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <button mat-button color="warn">Delete account</button>
+    <button mat-button color="warn" disabled >Delete account</button>
   </mat-expansion-panel>

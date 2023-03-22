@@ -10,3 +10,13 @@
     vertical-align: middle;
     line-height: 90px; 
 }
+
+#clickable{
+  cursor: pointer;
+  max-width: fit-content;
+  max-height: fit-content;
+}
+
+#clickable:hover{
+  text-decoration-line: underline;
+}
