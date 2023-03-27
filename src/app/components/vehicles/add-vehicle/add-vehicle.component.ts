@@ -57,8 +57,6 @@ export class AddVehicleComponent implements OnInit, OnDestroy{
        isElectric: electricVehicle === 'true',
        isParked: false
      }).subscribe({
-       next: () => {},
-       error: (e) => {},
        complete: () => {
          const dialogRef = this.dialog.open(InfoDialogComponent, {
            width: '350px',
